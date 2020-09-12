@@ -1,0 +1,12 @@
+POST http://localhost:3000/api/user/authenticate 
+Content-Type: application/json
+
+{
+    "email" : "ramesh@gmail.com",
+    "password" : "ramesh"
+}
+
+###
+GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoicmFtZXNoQGdtYWlsLmNvbSIsImlhdCI6MTU5OTc5NjY4Nn0.FzD_J0_jXfGubHsgd5BUozpsXjckizqATMMCNYN83Hc
+

@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "agrogrocer"
+    }
+  },
+  "defaultProject": "agrogrocer",
+  "cli": {
+    "analytics": "e15c344d-a65a-42a1-9bcf-9ffb9d64730f"
+  }
 }

@@ -1,0 +1,21 @@
+
+.container
+{
+  margin-top: 50px;
+
+}
+.form-control
+{
+  width: 500px;
+}
+input[type = submit]
+{
+  margin-left: 400px;
+  width: 100px;
+}
+.text-center
+{
+  margin-top: 150px;
+  color: green;
+  font-size: 3rem;
+}
