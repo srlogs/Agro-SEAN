@@ -36,4 +36,24 @@ export class UserService {
     return this.http.get('http://localhost:3000/api/products', { headers : headers});
   }
 
+  storePersonalData(userdata) :Observable<any> {
+    return this.http.post('http://localhost:3000/api/user/personalinfo', userdata);
+  }
+
+  getFruits() : Observable<any> {
+    return this.http.get('http://localhost:3000/api/fruits');
+  }
+
+  getVegetables() : Observable<any> {
+    return this.http.get('http://localhost:3000/api/vegetables');
+  }
+
+  getSingleProduct(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/fruit/name', data, {headers: headers});
+  }
+
 }

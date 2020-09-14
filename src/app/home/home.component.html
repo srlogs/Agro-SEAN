@@ -16,23 +16,31 @@
           <a class="nav-link" routerLink = "/home">Cart</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-3" type="search" placeholder="Search for products" aria-label="Search" style="width: 600px;">
+      <form class="form-inline my-2 my-lg-0" (submit) = "productData()">
+        <input class="form-control mr-sm-3" type="text" [(ngModel)] = "searchText" name="search" placeholder="Search for products" aria-label="Search" style="width: 600px;">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </nav>
-  <br><br>
-  <div *ngFor = "let data of items">
+  <br>
+  <div class="row justify-content-end" style="margin-right: 30px;">
+    <div class="btn-group col-md-2 ">
+      <button class="btn btn-sm btn-outline-secondary" (click) = "fruitsFunction()">Fruits</button>
+      <button class="btn btn-sm btn-outline-secondary" (click) = "vegetablesFunction()">Vegitables</button>
+    </div>
+  </div>
+  <br>
+  <div *ngFor = "let data of items | filter : searchText">
     <div class="card mb-3" style="max-width: 75%; margin-left: 30px;">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <img src="assets/{{data.name}}" >
+            <img src="assets/images/{{data.name}}" >
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">{{data.productname}}</h5>
               <p class="card-text"> Category : {{data.category}} </p>
+              <a href="#" class="btn btn-primary" style="width: 100px;">Buy</a>
               <!-- <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p> -->
               <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
             </div>

@@ -7,6 +7,28 @@ Content-Type: application/json
 }
 
 ###
+GET http://localhost:3000/api/fruit/name
+Content-Type: application/json
+
+{
+    "productname" : "apple"
+}
+
+###
+POST http://localhost:3000/api/user/personalinfo
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoibG9nZXNoQGdtYWlsLmNvbSIsImlhdCI6MTYwMDA5MjUxOX0.h8raLsBa7GhiBuwDL0IzfXrEbKbf5rF8XUp39Y67nIo
+
+Content-Type: application/json
+
+{
+    "email" : "logesh@gmail.com",
+    "mobile" : "9245849107",
+    "doorno" : "10",
+    "street" : "nethaji street",
+    "district" : "Dindigul"
+}
+
+###
 GET http://localhost:3000/api/auth
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoibG9nZXNoQGdtYWlsLmNvbSIsImlhdCI6MTYwMDAwNzY1Nn0.MTBHw9y6KSbbriu6ffwBvD8G-uyo4m83b89K8aNyeug
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbGlkIjoibG9nZXNoQGdtYWlsLmNvbSIsImlhdCI6MTYwMDA5MjUxOX0.h8raLsBa7GhiBuwDL0IzfXrEbKbf5rF8XUp39Y67nIo
 

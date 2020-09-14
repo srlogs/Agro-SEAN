@@ -19,6 +19,31 @@ con.connect(function(err) {
         // console.log("Database created");
     })
 });
+//  Get specific product 
+router.post('/fruit/name', (req, res, next) => {
+    console.log(req.body.productname);
+    con.query("SELECT * FROM productlist WHERE productname = ?", [req.body.productname], (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+//  Getting fruits data 
+router.get('/fruits', (req, res, next) => {
+    con.query("SELECT * FROM productlist WHERE category = 'fruit'", (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    } )
+   
+})
+
+//  Getting vegetables data 
+router.get('/vegetables', (req, res, next) => {
+    con.query("SELECT * FROM productlist WHERE category = 'vegetable'", (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    } )
+   
+})
 
 //  View product data
 router.get('/products', authenticate, (req, res, next) => {
@@ -98,6 +123,22 @@ router.post('/user/register', (req, res, next) => {
             if(err) throw err;
             console.log("record is inserted");
         })
+    })
+    res.sendStatus(200);
+})
+
+//  Adding personal information
+router.post('/user/personalinfo', (req, res, next) => {
+    con.query("CREATE TABLE IF NOT EXISTS personaldata(email VARCHAR(100), mobile VARCHAR(20), doorno VARCHAR(50), street VARCHAR(50), district VARCHAR(50))", (err, result) => {
+        if(err) throw err;
+    });
+    var sql = "INSERT INTO personaldata (email, mobile, doorno, street, district) VALUES ?";
+    let value = [
+        [req.body.email, req.body.mobile, req.body.doorno, req.body.street, req.body.district]
+    ];
+    con.query(sql, [value], (err, result) => {
+        if(err) throw err;
+        console.log("info inserted");
     })
     res.sendStatus(200);
 })

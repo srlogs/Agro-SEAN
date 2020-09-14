@@ -8,6 +8,7 @@ import { UserService } from '../user.service';
 })
 export class HomeComponent implements OnInit {
   items : any;
+  searchText :string;
   constructor(private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -22,7 +23,26 @@ export class HomeComponent implements OnInit {
     })
     
   }
+  fruitsFunction() {
+    this.userService.getFruits().subscribe(data => {
+      this.items = data;
+    })
+  }
 
+  vegetablesFunction() {
+    this.userService.getVegetables().subscribe(data => {
+      this.items = data;
+    })
+  }
+  productData() {
+    const data = {
+      productname : this.searchText
+    }
+    this.userService.getSingleProduct(data).subscribe(data => {
+      console.log(data);
+      this.items = data;
+    })
+  }
   ngOnInit(): void {
     this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
       console.log(data);

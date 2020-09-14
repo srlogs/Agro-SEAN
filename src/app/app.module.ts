@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
+import { SellProductComponent } from './sell-product/sell-product.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { AccountComponent } from './account/account.component';
     RegisterComponent,
     HomeComponent,
     LoginComponent,
-    AccountComponent
+    AccountComponent,
+    SellProductComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
