@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" routerLink="/home">Agro grocer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" (click) = "homeFunction()">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click) = "myAccountFunction()">My Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink = "/home">Cart</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-3" type="search" placeholder="Search for products" aria-label="Search" style="width: 600px; height: 30px;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span data-feather="home"></span>
+                  Hello {{username}} <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  My Orders
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  All Notification
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Log out
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Personal information</h1>
+          </div>
+          <div class="row justify-content-left">
+              <form>
+                  <div class="form-group">
+                    <input type="text" name="name" id="name" placeholder="Username">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="phone" id="phone" placeholder="Mobile Number">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="doornumber" id="doorno" placeholder="Door Number">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="street" id="street" placeholder="Street Name">
+                  </div>
+                  <div class="form-group">
+                    <input type="text" name="district" id="district" placeholder="District">
+                  </div>
+                  <div class="row">
+                    <input type="submit" name="login" value="Login" class="btn btn-success">
+                  </div>
+              </form>
+            </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
+

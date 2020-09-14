@@ -21,8 +21,8 @@ con.connect(function(err) {
 });
 
 //  View data
-router.get('/users', authenticate, (req, res, next) => {
-    con.query("SELECT * FROM userdata", (err, result) => {
+router.get('/auth', authenticate, (req, res, next) => {
+    con.query("SELECT * FROM userdata WHERE email = ?", [req.user.emailid], (err, result) => {
         if(err) throw err;
         res.send(result);
     })  
@@ -30,16 +30,15 @@ router.get('/users', authenticate, (req, res, next) => {
 
 //  Authenticate function 
 function authenticate(req, res, next) {
-    const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-    console.log("token value is ", token);
+    const authHeader = req.headers['token'];
+    const token = authHeader && authHeader.split(' ')[0];
     if(token == null) {
         return res.sendStatus(401);
     }
     jwt.verify(token, process.env.TOKEN_SECRET, (err, data) => {
         if(err) throw err;
         req.user = data;
-        console.log("email is ", req.user.emailid);
+        //console.log("email is ", req.user.emailid);
         next();
     })
 }
