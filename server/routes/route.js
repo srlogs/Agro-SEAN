@@ -20,6 +20,14 @@ con.connect(function(err) {
     })
 });
 
+//  View product data
+router.get('/products', authenticate, (req, res, next) => {
+    con.query("SELECT * FROM productlist", (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
 //  View data
 router.get('/auth', authenticate, (req, res, next) => {
     con.query("SELECT * FROM userdata WHERE email = ?", [req.user.emailid], (err, result) => {

@@ -22,3 +22,22 @@
       </form>
     </div>
   </nav>
+  <br><br>
+  <div *ngFor = "let data of items">
+    <div class="card mb-3" style="max-width: 75%; margin-left: 30px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="assets/{{data.name}}" >
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{data.productname}}</h5>
+              <p class="card-text"> Category : {{data.category}} </p>
+              <!-- <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p> -->
+              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  

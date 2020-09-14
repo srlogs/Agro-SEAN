@@ -28,4 +28,12 @@ export class UserService {
     return this.http.get('http://localhost:3000/api/auth', { headers : headers });
   }
 
+  getProducts(token) :Observable<any> {
+    const headerValues = {
+      token : token
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.get('http://localhost:3000/api/products', { headers : headers});
+  }
+
 }

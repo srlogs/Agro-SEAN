@@ -7,7 +7,7 @@ import { UserService } from '../user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  items : any;
   constructor(private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -24,6 +24,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
+      console.log(data);
+      this.items = data;
+    })
   }
 
 }
