@@ -35,13 +35,20 @@ export class HomeComponent implements OnInit {
     })
   }
   productData() {
-    const data = {
-      productname : this.searchText
+    if(this.searchText.length == 0) {
+      this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
+        this.items = data;
+      })
     }
-    this.userService.getSingleProduct(data).subscribe(data => {
-      console.log(data);
-      this.items = data;
-    })
+    else {
+      const data = {
+        productname : this.searchText
+      }
+      this.userService.getSingleProduct(data).subscribe(data => {
+        console.log(data);
+        this.items = data;
+      })
+    } 
   }
   ngOnInit(): void {
     this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
