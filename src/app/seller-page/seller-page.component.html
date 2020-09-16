@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/home">Agro grocer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click) = "myAccountFunction()">My Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink = "/home">Cart</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" (submit) = "productData()">
+        <input class="form-control mr-sm-3" type="text" [(ngModel)] = "searchText" name="search" placeholder="Search for products" aria-label="Search" style="width: 600px;">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <br>
+  <div class="container">
+      <div  *ngFor = "let data of item">
+          <div class="row justify-content-center">
+            <img  src="assets/images/{{data.name}}" >
+          </div>
+          <br>
+          <div class="row justify-content-center">
+            <label >{{data.productname}}</label>
+          </div>
+      </div>
+      <br>
+      <div class="d-flex flex-column">
+          <div class="row h-100 justify-content-center align-items-center">
+            <form (submit) = "sellProduct()">
+                <div class="form-group row">
+                    <label>Quantity</label>
+                    <div style="margin-left: 10px;">
+                        <input type="text" name="quantity" id="quantity" [(ngModel)] = "quantity" style="width: 300px;" placeholder="Enter in Kgs" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <label >Price</label>
+                    <div style="margin-left: 33px;">
+                        <input type="text" name="price" id="price" [(ngModel)] = "price" style="width: 300px;" placeholder="Enter in Ruppees" class="form-control">
+                    </div>
+                </div>
+                <div class="row" style="margin-left: 250px;">
+                    <button type="submit" name="sell" class="btn btn-success" style="width: 100px;">Sell</button>
+                </div>
+            </form>
+
+            <br>
+          </div>
+      </div>
+  </div>

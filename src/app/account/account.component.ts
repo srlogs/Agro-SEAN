@@ -15,6 +15,7 @@ export class AccountComponent implements OnInit {
   district : string;
   name : string;
   users : any;
+  check : boolean = false;
   constructor(private userService : UserService, private router : Router) { }
   myAccountFunction() {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
@@ -61,15 +62,41 @@ export class AccountComponent implements OnInit {
       street : this.street,
       district : this.district
     }
-    this.userService.storePersonalData(userdata).subscribe(data => {
-      console.log(data);
-    })
+    if(!this.check) {
+      this.userService.storePersonalData(userdata).subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/account']);
+      })
+    }
+    else {
+      this.userService.updatePersonalInfo(userdata).subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/account']);
+      })
+    }
   }
 
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.username = data[0].username;
+      this.name = data[0].username;
       this.email = data[0].email;
+      const userdata = {
+        email : this.email
+      }
+      this.userService.getPersonalInfo(userdata).subscribe(data => {
+        this.users = data;
+        if(this.users.length > 0) {
+          this.check = true;
+          this.street = data[0].street;
+          this.doorno = data[0].doorno;
+          this.district = data[0].district;
+          this.phone = data[0].mobile;
+        } 
+        else {
+          this.check = false;
+        }
+      })
     })
   }
 

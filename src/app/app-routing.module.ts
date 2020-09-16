@@ -7,6 +7,8 @@ import { AccountComponent } from './account/account.component';
 import { CanActivate } from '@angular/router';
 import { AuthGuardService } from './auth-guard.service';
 import { SellProductComponent } from './sell-product/sell-product.component';
+import { SellerPageComponent } from './seller-page/seller-page.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 const routes: Routes = [
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: "sell-product",
     component: SellProductComponent
+  },
+  {
+    path: "seller-page",
+    component: SellerPageComponent
+  },
+  {
+    path: "product-list",
+    component: ProductListComponent
   }
 ];
 

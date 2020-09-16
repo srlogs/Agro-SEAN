@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AccountComponent } from './account/account.component';
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { FilterPipe } from './filter.pipe';
+import { SellerPageComponent } from './seller-page/seller-page.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { FilterPipe } from './filter.pipe';
     LoginComponent,
     AccountComponent,
     SellProductComponent,
-    FilterPipe
+    FilterPipe,
+    SellerPageComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

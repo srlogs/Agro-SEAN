@@ -56,4 +56,50 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/fruit/name', data, {headers: headers});
   }
 
+  postSellerData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/seller', data, { headers: headers});
+  }
+ 
+  getSellerData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/seller/data', data, { headers: headers});
+  }
+
+  getPersonalInfo(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/personaldata', data, {headers: headers});
+  }
+
+  updatePersonalInfo(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/personalinfo/update', data, {headers: headers});
+  }
+  getLocation() : Promise<any> {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resp => {
+        resolve({lat : resp.coords.latitude, lon : resp.coords.longitude});
+      },
+      err => {
+        reject(err);
+      });
+    });
+  }
+
 }

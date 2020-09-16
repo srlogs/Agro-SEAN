@@ -19,9 +19,33 @@ con.connect(function(err) {
         // console.log("Database created");
     })
 });
+
+
+//  Get seller data list 
+router.post('/seller/data', (req,res, next) => {
+    var sql = "SELECT * FROM sellerdata WHERE email = ?";
+    var values = [
+        [req.body.email]
+    ];
+    con.query(sql, [values], (err, result) => {
+        if(err) throw result;
+        res.send(result);
+    })
+})
+
+//  Get personal information
+router.post('/user/personaldata', (req, res, next) => {
+    var sql = "SELECT * FROM personaldata WHERE email = ?";
+    var values = [
+        [req.body.email]
+    ];
+    con.query(sql, [values], (err, result) =>{
+        res.send(result);
+    })
+})
+
 //  Get specific product 
 router.post('/fruit/name', (req, res, next) => {
-    console.log(req.body.productname);
     con.query("SELECT * FROM productlist WHERE productname = ?", [req.body.productname], (err, result) => {
         if(err) throw err;
         res.send(result);
@@ -82,7 +106,6 @@ router.post('/user/authenticate', (req, res, next) => {
     console.log(req.body.email);
     con.query("SELECT email, password FROM userdata WHERE email = ?", [req.body.email], (err, result) => {
         if(err) throw err;
-        console.log(result);
         if(result.length > 0) {
             const email = req.body.email;
             const user = { emailid : email };
@@ -90,7 +113,6 @@ router.post('/user/authenticate', (req, res, next) => {
             bcrypt.compare(req.body.password, result[0].password, function(err, isMatch) {
                 if(err) 
                     throw err;
-                console.log(isMatch);
                 if(isMatch) {
                     res.json({accesstoken : accessToken, status : 200 });
                 } 
@@ -140,7 +162,35 @@ router.post('/user/personalinfo', (req, res, next) => {
         if(err) throw err;
         console.log("info inserted");
     })
-    res.sendStatus(200);
+    res.json({status : 200});
+})
+
+//  update personal info
+router.post('/user/personalinfo/update', (req, res, next) => {
+    var sql = "UPDATE personaldata SET mobile = ?, doorno = ?, street = ?, district = ? WHERE email = ?";
+    var values = [
+        req.body.mobile, req.body.doorno, req.body.street, req.body.district, req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.json({status : 200});
+    })
+})
+
+//  Adding seller list
+router.post('/user/seller', (req, res, next) => {
+    con.query("CREATE TABLE IF NOT EXISTS sellerdata(email VARCHAR(100), productname VARCHAR(50), location VARCHAR(50), category VARCHAR(50), quantity VARCHAR(20), price VARCHAR(50), latitude VARCHAR(100), longitude VARCHAR(100))", (err, result) => {
+        if(err) throw err;
+    });
+    var sql = "INSERT INTO sellerdata (email, productname, location, category, quantity, price, latitude, longitude) VALUES ?";
+    let value = [
+        [req.body.email, req.body.productName, req.body.location, req.body.category, req.body.quantity, req.body.price, req.body.latitude, req.body.longitude]
+    ];
+    con.query(sql, [value], (err, result) => {
+        if(err) throw err;
+        console.log("seller data inserted");
+    })
+    res.json({status : 200});
 })
 
 module.exports = router;
