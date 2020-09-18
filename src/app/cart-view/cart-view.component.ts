@@ -12,6 +12,7 @@ export class CartViewComponent implements OnInit {
   searchText : string;
   userId : any;
   items : any;
+  check : boolean = false;
   constructor(private homeComponent : HomeComponent, private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -43,6 +44,17 @@ export class CartViewComponent implements OnInit {
     } 
   }
 
+  deleteProductData(data : any) {
+    console.log(data);
+    const productData = {
+      productname : data.productname
+    }
+    this.userService.deleteCartData(productData).subscribe(data => {
+      console.log(data);
+      window.location.reload();
+    })
+  } 
+  
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
@@ -51,6 +63,12 @@ export class CartViewComponent implements OnInit {
       }
       this.userService.getCartData(userdata).subscribe(data => {
         this.items = data;
+        if(this.items.length > 0) {
+          this.check = true;
+        } 
+        else {
+          this.check = false;
+        }
       })
       
     })

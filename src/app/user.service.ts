@@ -64,6 +64,14 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/getcart/', data, {headers: headers});
   }
 
+  deleteCartData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/deletecart', data, { headers: headers});
+  }
+
   getCartProductCount(data) : Observable<any> {
     const headerValues = {
       "Content-type" : "application/json"

@@ -209,6 +209,20 @@ router.post('/user/cartdata/count', (req, res, next) => {
     })
 })
 
+//  Delete cart data 
+router.post('/user/deletecart', (req, res, next) => {
+    console.log(req.body.productname);
+    var sql = "DELETE FROM cartdata WHERE productname = ?";
+    var values = [
+        req.body.productname
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.json({status : "deleted"});
+    })
+})
+
 //  Get cart data 
 router.post('/user/getcart/', (req, res, next) => {
     var sql = "SELECT DISTINCT email, productname, location, category, time FROM cartdata WHERE email = ?";

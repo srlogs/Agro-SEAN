@@ -13,7 +13,7 @@
             <a class="nav-link" (click) = "myAccountFunction()">My Account</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink = "/home">Cart</a>
+          <a class="nav-link" routerLink = "/cart-view">Cart</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0" (submit) = "productData()">
@@ -33,6 +33,7 @@
     </div>
   </div>
   <br>
+
   <div *ngFor = "let data of items | filter : searchText ; let i = index">
     <div class="card mb-3" style="max-width: 75%; margin-left: 30px;">
         <div class="row no-gutters" *ngFor = "let count of productCount[i]">
