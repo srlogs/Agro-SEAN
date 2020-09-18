@@ -56,6 +56,30 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/fruit/name', data, {headers: headers});
   }
 
+  getCartData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/getcart/', data, {headers: headers});
+  }
+
+  getCartProductCount(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/cartdata/count', data, { headers: headers});
+  }
+
+  storeCartData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/cartdata', data, { headers: headers});
+  }
+
   postSellerData(data) : Observable<any> {
     const headerValues = {
       "Content-type" : "application/json",
@@ -91,6 +115,16 @@ export class UserService {
     var headers = new HttpHeaders(headerValues);
     return this.http.post('http://localhost:3000/api/user/personalinfo/update', data, {headers: headers});
   }
+
+  getProductCount(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/seller/count', data, { headers: headers});
+  }
+
   getLocation() : Promise<any> {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resp => {

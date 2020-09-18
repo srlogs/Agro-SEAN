@@ -9,6 +9,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { SellProductComponent } from './sell-product/sell-product.component';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { CartViewComponent } from './cart-view/cart-view.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: "product-list",
     component: ProductListComponent
+  },
+  {
+    path: "cart-view",
+    component: CartViewComponent
   }
 ];
 

@@ -13,6 +13,7 @@ import { SellProductComponent } from './sell-product/sell-product.component';
 import { FilterPipe } from './filter.pipe';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { CartViewComponent } from './cart-view/cart-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProductListComponent } from './product-list/product-list.component';
     SellProductComponent,
     FilterPipe,
     SellerPageComponent,
-    ProductListComponent
+    ProductListComponent,
+    CartViewComponent
   ],
   imports: [
     BrowserModule,

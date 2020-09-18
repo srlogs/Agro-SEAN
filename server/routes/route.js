@@ -165,6 +165,63 @@ router.post('/user/personalinfo', (req, res, next) => {
     res.json({status : 200});
 })
 
+//  Get count of seller products 
+router.post('/seller/count', (req, res, next) => {
+    var sql = "SELECT COUNT(productname) as productCount, productname FROM sellerdata WHERE productname = ?";
+    var values = [req.body.productname];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.json(result);
+    })
+})
+
+//  Adding cart data 
+router.post('/user/cartdata', (req, res, next) => {
+    var sql = "CREATE TABLE IF NOT EXISTS cartdata(email VARCHAR(50), productname VARCHAR(50), location VARCHAR(20), category VARCHAR(50), time VARCHAR(50))";
+    con.query(sql, (err, result) => {
+        if(err) throw err;
+    
+    sql = "INSERT INTO cartdata(email, productname, location, category, time) VALUES ?";
+    var values = [
+        [req.body.email, req.body.productname, req.body.location, req.body.category, req.body.time]
+    ];
+    con.query(sql, [values], (err, result) => {
+        if(err) throw err;
+        res.json({status : "success"});
+    })
+    
+    })
+})
+
+//  Get count of product in cart data
+router.post('/user/cartdata/count', (req, res, next) => {
+    var sql = "CREATE TABLE IF NOT EXISTS cartdata(email VARCHAR(50), productname VARCHAR(50), location VARCHAR(20), category VARCHAR(50), time VARCHAR(50))";
+    con.query(sql, (err, result) => {
+        if(err) throw err;
+    })
+    var sql= "SELECT COUNT(*) AS productcount WHERE productname = ?";
+    var values = [
+        req.body.productname
+    ]
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
+//  Get cart data 
+router.post('/user/getcart/', (req, res, next) => {
+    var sql = "SELECT * FROM cartdata WHERE email = ?";
+    var values = [
+        req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send(result);
+    })
+})
+
 //  update personal info
 router.post('/user/personalinfo/update', (req, res, next) => {
     var sql = "UPDATE personaldata SET mobile = ?, doorno = ?, street = ?, district = ? WHERE email = ?";
