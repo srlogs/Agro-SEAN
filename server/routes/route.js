@@ -211,7 +211,7 @@ router.post('/user/cartdata/count', (req, res, next) => {
 
 //  Get cart data 
 router.post('/user/getcart/', (req, res, next) => {
-    var sql = "SELECT * FROM cartdata WHERE email = ?";
+    var sql = "SELECT DISTINCT email, productname, location, category, time FROM cartdata WHERE email = ?";
     var values = [
         req.body.email
     ];

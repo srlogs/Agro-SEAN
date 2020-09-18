@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
       email : this.userId,
       productname : data.productname,
       location : data.name,
-      category : data.category,
+      category : data.category, 
       time : this.dT
     }
     this.userService.storeCartData(cartData).subscribe(data => {
