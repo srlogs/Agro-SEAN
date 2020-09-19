@@ -10,6 +10,7 @@ import { SellProductComponent } from './sell-product/sell-product.component';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
+import { BuyerPageComponent } from './buyer-page/buyer-page.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: "cart-view",
     component: CartViewComponent
+  },
+  {
+    path: "buyer-page",
+    component: BuyerPageComponent
   }
 ];
 

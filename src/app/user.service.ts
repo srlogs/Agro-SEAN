@@ -97,6 +97,24 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/seller', data, { headers: headers});
   }
  
+  getSellerProduct(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/sellerproduct', data, {headers: headers});
+  }
+  
+  getUserData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/get/userdata', data, { headers: headers});
+  }
+
   getSellerData(data) : Observable<any> {
     const headerValues = {
       "Content-type" : "application/json",

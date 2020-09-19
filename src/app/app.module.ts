@@ -14,6 +14,7 @@ import { FilterPipe } from './filter.pipe';
 import { SellerPageComponent } from './seller-page/seller-page.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
+import { BuyerPageComponent } from './buyer-page/buyer-page.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CartViewComponent } from './cart-view/cart-view.component';
     FilterPipe,
     SellerPageComponent,
     ProductListComponent,
-    CartViewComponent
+    CartViewComponent,
+    BuyerPageComponent
   ],
   imports: [
     BrowserModule,

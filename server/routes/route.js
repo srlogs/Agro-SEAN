@@ -33,6 +33,18 @@ router.post('/seller/data', (req,res, next) => {
     })
 })
 
+//  Get seller for specific product 
+router.post('/user/sellerproduct', (req, res, next) => {
+    var sql = "SELECT * FROM sellerdata WHERE productname = ?";
+    var values = [
+        req.body.productname
+    ]
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
 //  Get personal information
 router.post('/user/personaldata', (req, res, next) => {
     var sql = "SELECT * FROM personaldata WHERE email = ?";
@@ -67,6 +79,18 @@ router.get('/vegetables', (req, res, next) => {
         res.send(result);
     } )
    
+})
+
+//  Get user data
+router.post('/get/userdata', (req, res, next) => {
+    var sql = "SELECT * FROM userdata WHERE email = ?";
+    var values = [
+        req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
 })
 
 //  View product data
@@ -218,7 +242,6 @@ router.post('/user/deletecart', (req, res, next) => {
     ];
     con.query(sql, values, (err, result) => {
         if(err) throw err;
-        console.log(result);
         res.json({status : "deleted"});
     })
 })
@@ -231,7 +254,6 @@ router.post('/user/getcart/', (req, res, next) => {
     ];
     con.query(sql, values, (err, result) => {
         if(err) throw err;
-        console.log(result);
         res.send(result);
     })
 })

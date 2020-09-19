@@ -75,10 +75,10 @@ export class CartViewComponent implements OnInit {
     
     
     //console.log(this.items);
-    // this.homeComponent.getCartData().subscribe(data => {
-    //   this.items = data;
-    //   console.log(this.items);
-    // })
+    this.homeComponent.getCartData().subscribe(data => {
+      this.items = data;
+      console.log(this.items);
+    })
   }
 
 }

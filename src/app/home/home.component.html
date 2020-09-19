@@ -46,7 +46,7 @@
               <p class="card-text">Seller availability : {{count.productCount}}</p>
               <p class="card-text"> Category : {{data.category}} </p>
               <div class = "row">
-                <a href="#" class="btn btn-primary" style="width: 100px;">Buy</a>
+                <button (click) = "buyButtonData(data)" class="btn btn-primary" style="width: 100px;">Buy</button>
                 <!-- <btto href="#" class="btn btn-success ml-3" style="width: 200px;">Add to cart</a> -->
                   <button (click) = "cartFunction(data)" class="btn btn-success ml-3" style="width: 200px">Add to cart</button>
               </div>

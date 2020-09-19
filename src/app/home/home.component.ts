@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   userId : string;
   dT : string;
   private subject = new Subject<any>();
+  private buy = new Subject<any>();
   constructor(private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -97,7 +98,7 @@ export class HomeComponent implements OnInit {
   }
 
   cartFunction(data :any ) {
-    console.log(data);
+    //console.log(data);
     this.subject.next(data);
     const productCountData = {
       productname : data.productname
@@ -127,6 +128,16 @@ export class HomeComponent implements OnInit {
     return this.subject.asObservable();
   }
 
+  buyButtonData(data : any) {
+    this.buy.next(data);
+    localStorage.setItem('productName', data.productname);
+    this.router.navigate(['/buyer-page']);
+  } 
+
+  getBuyData() : Observable<any> {
+    return this.buy.asObservable();
+  }
+
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
@@ -145,7 +156,7 @@ export class HomeComponent implements OnInit {
           var length = this.productCount.push(data);
         })
       }
-      console.log(this.productCount);
+      //console.log(this.productCount);
       
     })
   }

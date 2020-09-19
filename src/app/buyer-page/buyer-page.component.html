@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/home">Agro grocer</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click) = "myAccountFunction()">My Account</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink = "/cart-view">Cart</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" (submit) = "productData()">
+        <input class="form-control mr-sm-3" type="text" [(ngModel)] = "searchText" name="search" placeholder="Search for products" aria-label="Search" style="width: 600px;">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <br>
+
+  <div class="row justify-content-center align-items-center">
+      <div *ngFor="let data of product">
+        <img src="assets/images/{{data.name}}">
+      </div>
+  </div>
+  <br>
+  <div class="row justify-content-center align-items-center">
+    <p> {{productName}}</p>
+  </div>
+  <div *ngFor = "let data of sellerProducts; let j = index">
+    <div class="card">
+        <h5 class="card-header">{{productName}}</h5>
+        <div class="card-body">
+          <!-- <h5 class="card-title">Special title treatment</h5> -->
+          <div *ngFor="let i of seller[j]">
+              <h5 class="card-title">Seller Name : {{i.username}}</h5>
+          </div>
+          <p class="card-text">Category : {{data.category}}</p>
+          <p class="card-text">Quantity : {{data.quantity}}</p>
+          <p class="card-text">Price : {{data.price}}</p>
+          <button (click) = "buyProduct(data)" class="btn btn-primary">Buy</button>
+        </div>
+      </div>
+      <br>
+  </div>
+
+  
