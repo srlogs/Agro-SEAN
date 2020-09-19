@@ -16,6 +16,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { BuyerPageComponent } from './buyer-page/buyer-page.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { NotifictionPageComponent } from './notifiction-page/notifiction-page.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     ProductListComponent,
     CartViewComponent,
     BuyerPageComponent,
-    OrderListComponent
+    OrderListComponent,
+    NotifictionPageComponent
   ],
   imports: [
     BrowserModule,

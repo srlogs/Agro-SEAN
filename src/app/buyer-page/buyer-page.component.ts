@@ -54,7 +54,7 @@ export class BuyerPageComponent implements OnInit {
   buyProduct(buyerData :any) {
     console.log(buyerData);
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
-      //  Buyer email
+      //  Buyer email id
       this.userId = data[0].email;
       const buy = {
         sellerEmail : buyerData.email,
@@ -68,9 +68,10 @@ export class BuyerPageComponent implements OnInit {
       this.userService.storeBuyProductData(buy).subscribe(data => {
         console.log(data);
       })
-      // this.userService.sendReceipt(buy).subscribe(data => {
-      //   console.log(data);
-      // })
+      //  Sending email
+      this.userService.sendReceipt(buy).subscribe(data => {
+        console.log(data);
+      })
     })
     this.router.navigate(['/order-list']);
   }

@@ -22,17 +22,22 @@
     </div>
   </nav>
   <br>
+
   <div *ngFor = "let data of items">
     <div class="card">
         <h5 class="card-header">{{data.productname}}</h5>
         <div class="card-body">
           <!-- <h5 class="card-title">Special title treatment</h5> -->
+            <p class="card-text">Buyer</p>
             <p class="card-text">Quantity : {{data.quantity}}</p>
             <p class="card-text">Price : {{data.price}}</p>
             <p class="card-text" *ngIf = "data.buyerstatus == 1">Status : Requested</p>
             <p class="card-text" *ngIf = "data.buyerstatus == 2">Status : Accepted</p>
             <p class="card-text" *ngIf = "data.buyerstatus == 3">Status : Rejected</p>
-            <a href="#" class="btn btn-danger">Cancel</a>
+            <div class="row">
+              <button (click) = "acceptButton()" class="btn btn-success ml-1">Accept</button>
+              <button (click) = "rejectButton()" class="btn btn-danger ml-3">Reject</button>
+            </div>
         </div>
       </div>
       <br>

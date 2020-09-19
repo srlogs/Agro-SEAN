@@ -11,6 +11,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { BuyerPageComponent } from './buyer-page/buyer-page.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { NotifictionPageComponent } from './notifiction-page/notifiction-page.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,10 @@ const routes: Routes = [
   {
     path: "order-list",
     component: OrderListComponent
+  },
+  {
+    path: "notification",
+    component: NotifictionPageComponent
   }
 ];
 

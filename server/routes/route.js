@@ -303,6 +303,42 @@ router.post('/user/buy', (req, res, next) => {
     })
 })
 
+//  Get buyer orders
+router.post('/user/orderlist', (req, res, next) => {
+    var sql = "SELECT * FROM buyerdata WHERE buyeremail = ?";
+    var values = [
+        req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
+//  Get seller notifications
+router.post('/user/sellerlist', (req, res, next) => {
+    var sql = "SELECT * FROM buyerdata WHERE selleremail = ?";
+    var values = [
+        req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    })
+})
+
+//  Accept  and reject orders
+router.post('/user/order/accept', (req, res, next) => {
+    var sql = "UPDATE buyerdata SET buyerstatus = ? where selleremail = ?";
+    var values = [
+        req.body.status, req.body.email
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.json({status : "processed"});
+    })
+})
+
 //  Sending email as receipt
 router.post('/user/receipt', (req, res, next) => {
     var transporter = nodemailer.createTransport({

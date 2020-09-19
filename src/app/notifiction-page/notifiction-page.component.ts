@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Routes, RouterModule} from '@angular/router';
 import { UserService } from '../user.service';
-import { Observable, Subject } from 'rxjs';
+
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-notifiction-page',
+  templateUrl: './notifiction-page.component.html',
+  styleUrls: ['./notifiction-page.component.css']
 })
-export class OrderListComponent implements OnInit {
+export class NotifictionPageComponent implements OnInit {
   userId : string;
   items : any;
   searchText : string;
-
   constructor(private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -44,15 +43,47 @@ export class OrderListComponent implements OnInit {
     } 
   }
 
+  acceptButton() {
+    const accept = {
+      status : "2",
+      email : this.userId
+    }
+    this.userService.orderAcceptance(accept).subscribe(data => {
+      console.log(data);
+    })
+    this.reloadFunction();
+  }
+
+  rejectButton() {
+    const reject = {
+      status : "3",
+      email : this.userId
+    }
+    this.userService.orderAcceptance(reject).subscribe(data => {
+      console.log(data);
+    })
+    this.reloadFunction();
+  }
+
+  reloadFunction() {
+    const userEmail = {
+      email : this.userId
+    }
+    this.userService.getSellerList(userEmail).subscribe(data => {
+      this.items = data;
+      //console.log(this.items);
+    })
+  }
+  
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
       const userEmail = {
         email : this.userId
       }
-      this.userService.getBuyProductData(userEmail).subscribe(data => {
+      this.userService.getSellerList(userEmail).subscribe(data => {
         this.items = data;
-        console.log(this.items);
+        //console.log(this.items);
       })
     })
   }
