@@ -15,6 +15,7 @@ import { SellerPageComponent } from './seller-page/seller-page.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CartViewComponent } from './cart-view/cart-view.component';
 import { BuyerPageComponent } from './buyer-page/buyer-page.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BuyerPageComponent } from './buyer-page/buyer-page.component';
     SellerPageComponent,
     ProductListComponent,
     CartViewComponent,
-    BuyerPageComponent
+    BuyerPageComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,

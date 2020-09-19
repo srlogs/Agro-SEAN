@@ -51,8 +51,28 @@ export class BuyerPageComponent implements OnInit {
     } 
   }
 
-  buyProduct(data :any) {
-    console.log(data);
+  buyProduct(buyerData :any) {
+    console.log(buyerData);
+    this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
+      //  Buyer email
+      this.userId = data[0].email;
+      const buy = {
+        sellerEmail : buyerData.email,
+        buyerEmail : this.userId,
+        productName : buyerData.productname,
+        quantity : buyerData.quantity,
+        price : buyerData.price,
+        buyerStatus : "1",
+        sellerStatus : "1"
+      }
+      this.userService.storeBuyProductData(buy).subscribe(data => {
+        console.log(data);
+      })
+      // this.userService.sendReceipt(buy).subscribe(data => {
+      //   console.log(data);
+      // })
+    })
+    this.router.navigate(['/order-list']);
   }
 
   ngOnInit(): void {

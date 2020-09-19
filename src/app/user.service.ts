@@ -151,6 +151,24 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/seller/count', data, { headers: headers});
   }
 
+  storeBuyProductData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/buy', data, { headers: headers});
+  }
+
+  sendReceipt(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/receipt', data, { headers: headers});
+  }
+
   getLocation() : Promise<any> {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resp => {

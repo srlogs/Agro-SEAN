@@ -4,6 +4,7 @@ const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const config = require('../config.js');
 const jwt = require('jsonwebtoken');
+var nodemailer = require('nodemailer');
 const router = express.Router();
 const saltRounds = 10;
 
@@ -195,7 +196,6 @@ router.post('/seller/count', (req, res, next) => {
     var values = [req.body.productname, req.body.email];
     con.query(sql, values, (err, result) => {
         if(err) throw err;
-        console.log(result);
         res.json(result);
     })
 })
@@ -285,6 +285,53 @@ router.post('/user/seller', (req, res, next) => {
         console.log("seller data inserted");
     })
     res.json({status : 200});
+})
+
+//  Adding Buy products table
+router.post('/user/buy', (req, res, next) => {
+    var sql = "CREATE TABLE IF NOT EXISTS buyerdata(selleremail VARCHAR(50), buyeremail VARCHAR(50), productname VARCHAR(50), quantity VARCHAR(50), price VARCHAR(50), buyerstatus VARCHAR(10), sellerstatus VARCHAR(50))";
+    con.query(sql, (err, result) => {
+        if(err) throw err; 
+    })
+    sql = "INSERT INTO buyerdata(selleremail, buyeremail, productname, quantity, price, buyerstatus, sellerstatus) values ?";
+    var values = [
+        [req.body.sellerEmail, req.body.buyerEmail, req.body.productName, req.body.quantity, req.body.price, req.body.buyerStatus, req.body.sellerStatus]
+    ];
+    con.query(sql, [values], (err, result) => {
+        if(err) throw err;
+        res.json({status : "success"})
+    })
+})
+
+//  Sending email as receipt
+router.post('/user/receipt', (req, res, next) => {
+    var transporter = nodemailer.createTransport({
+        service : 'gmail',
+        auth : {
+            user : 'admin@agrogrocer.in',
+            pass : 'goAgro!'
+        }
+    });
+    let productName = req.body.productName;
+    let quantity = req.body.quantity;
+    let price = req.body.price;
+    var mailOptions = {
+        from : 'admin@agrogrocer.in',
+        to : req.body.buyerEmail,
+        subject : 'Reg:- product order at Agro Grocer',
+        text : 
+`product Name : ${productName}
+Quantity : ${quantity}
+Price : ${price}
+        
+        Order placed successfully`
+    };
+    transporter.sendMail(mailOptions, (err, info) => {
+        if(err) console.log(err);
+        else 
+            console.log("email sent successfully");
+    })
+    res.json({status: "email sent successfully"});
 })
 
 module.exports = router;
