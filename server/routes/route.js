@@ -35,9 +35,9 @@ router.post('/seller/data', (req,res, next) => {
 
 //  Get seller for specific product 
 router.post('/user/sellerproduct', (req, res, next) => {
-    var sql = "SELECT * FROM sellerdata WHERE productname = ?";
+    var sql = "SELECT * FROM sellerdata WHERE productname = ? AND email <> ?";
     var values = [
-        req.body.productname
+        req.body.productname, req.body.email
     ]
     con.query(sql, values, (err, result) => {
         if(err) throw err;
@@ -191,10 +191,11 @@ router.post('/user/personalinfo', (req, res, next) => {
 
 //  Get count of seller products 
 router.post('/seller/count', (req, res, next) => {
-    var sql = "SELECT COUNT(productname) as productCount, productname FROM sellerdata WHERE productname = ?";
-    var values = [req.body.productname];
+    var sql = "SELECT COUNT(productname) as productCount, productname FROM sellerdata WHERE productname = ? AND email <> ?";
+    var values = [req.body.productname, req.body.email];
     con.query(sql, values, (err, result) => {
         if(err) throw err;
+        console.log(result);
         res.json(result);
     })
 })

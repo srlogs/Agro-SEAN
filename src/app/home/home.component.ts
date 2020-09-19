@@ -103,9 +103,6 @@ export class HomeComponent implements OnInit {
     const productCountData = {
       productname : data.productname
     }
-    // this.userService.getCartProductCount(productCountData).subscribe(data => {
-    //   console.log(data);
-    // })
     const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
     ];
@@ -141,24 +138,24 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
-    })
-    this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
-      //console.log(data);
-      //  Products data
-      this.items = data;
-      //  product count
-      this.productCount = [];
-      for(var i = 0; i < this.items.length; ++i) {
-        const productName = {
-          productname : this.items[i].productname
+      this.userService.getProducts(localStorage.getItem('accessToken')).subscribe(data => {
+        //console.log(data);
+        //  Products data
+        this.items = data;
+        //  product count
+        this.productCount = [];
+        for(var i = 0; i < this.items.length; ++i) {
+          const productName = {
+            productname : this.items[i].productname,
+            email : this.userId
+          }
+          this.userService.getProductCount(productName).subscribe(data => {
+            var length = this.productCount.push(data);
+          })
         }
-        this.userService.getProductCount(productName).subscribe(data => {
-          var length = this.productCount.push(data);
-        })
-      }
-      //console.log(this.productCount);
-      
+      })
     })
+    
   }
 
 }

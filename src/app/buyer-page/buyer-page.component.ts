@@ -20,6 +20,7 @@ export class BuyerPageComponent implements OnInit {
   product : any;
   searchText : string; 
   seller : any;
+  check : boolean = false;
   constructor(private userService : UserService, private homeComponent : HomeComponent, private router : Router) { }
   myAccountFunction() {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
@@ -59,31 +60,36 @@ export class BuyerPageComponent implements OnInit {
       this.buyButtonData = data;
       //console.log(this.buyButtonData);
     })
-    //console.log(localStorage.getItem('productName'));
-    const productName = {
-      productname : localStorage.getItem('productName')
-    }
-    this.userService.getSingleProduct(productName).subscribe(data => {
-      this.productName = data[0].productname;
-      this.location = data[0].name;
-      this.product = data;
-      //console.log(this.location);
-    })
-    this.userService.getSellerProduct(productName).subscribe(data => {
-      this.sellerProducts = data;
-      this.seller = [];
-      for(var i = 0; i < data.length; ++i) {
-        const sellerEmail = {
-          email : data[i].email
-        }
-        this.userService.getUserData(sellerEmail).subscribe(data => {
-          var length = this.seller.push(data);
-          console.log(this.seller);
-        })
+    this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
+      this.userId = data[0].email;
+      console.log(this.userId);
+      const productName = {
+        productname : localStorage.getItem('productName'),
+        email : this.userId
       }
-      console.log(this.sellerProducts);
+      this.userService.getSingleProduct(productName).subscribe(data => {
+        this.productName = data[0].productname;
+        this.location = data[0].name;
+        this.product = data;
+      })
+      this.userService.getSellerProduct(productName).subscribe(data => {
+        this.sellerProducts = data;
+        this.seller = [];
+        for(var i = 0; i < data.length; ++i) {
+          const sellerEmail = {
+            email : data[i].email
+          }
+          this.userService.getUserData(sellerEmail).subscribe(data => {
+            var length = this.seller.push(data);
+            if(this.sellerProducts.length > 0) {
+              this.check = true;
+            }
+            else {
+              this.check = false;
+            }
+          })
+        }
+      })
     })
-    
-    
   }
 }
