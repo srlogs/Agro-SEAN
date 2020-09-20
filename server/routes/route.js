@@ -273,12 +273,12 @@ router.post('/user/personalinfo/update', (req, res, next) => {
 
 //  Adding seller list
 router.post('/user/seller', (req, res, next) => {
-    con.query("CREATE TABLE IF NOT EXISTS sellerdata(email VARCHAR(100), productname VARCHAR(50), location VARCHAR(50), category VARCHAR(50), quantity VARCHAR(20), price VARCHAR(50), latitude VARCHAR(100), longitude VARCHAR(100))", (err, result) => {
+    con.query("CREATE TABLE IF NOT EXISTS sellerdata(email VARCHAR(100), productname VARCHAR(50), location VARCHAR(50), category VARCHAR(50), quantity VARCHAR(20), price VARCHAR(50), latitude VARCHAR(100), longitude VARCHAR(100), status VARCHAR(10))", (err, result) => {
         if(err) throw err;
     });
-    var sql = "INSERT INTO sellerdata (email, productname, location, category, quantity, price, latitude, longitude) VALUES ?";
+    var sql = "INSERT INTO sellerdata (email, productname, location, category, quantity, price, latitude, longitude, status) VALUES ?";
     let value = [
-        [req.body.email, req.body.productName, req.body.location, req.body.category, req.body.quantity, req.body.price, req.body.latitude, req.body.longitude]
+        [req.body.email, req.body.productName, req.body.location, req.body.category, req.body.quantity, req.body.price, req.body.latitude, req.body.longitude, req.body.status]
     ];
     con.query(sql, [value], (err, result) => {
         if(err) throw err;
@@ -286,6 +286,19 @@ router.post('/user/seller', (req, res, next) => {
     })
     res.json({status : 200});
 })
+
+//  Updating seller data status
+router.post('/user/seller/status', (req, res, next) => {
+    var sql = "UPDATE sellerdata SET status = ? WHERE email = ? AND productname = ? AND quantity = ? AND price = ?";
+    var values = [
+        req.body.status, req.body.email, req.body.productName, req.body.quantity, req.body.price
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.json({status : "data updated"});
+    })
+})
+
 
 //  Adding Buy products table
 router.post('/user/buy', (req, res, next) => {
@@ -338,6 +351,19 @@ router.post('/user/order/accept', (req, res, next) => {
         res.json({status : "processed"});
     })
 })
+
+//  Deleting seller data after completing transaction
+router.post('/user/delete/product', (req, res, next) => {
+    var sql = "DELETE FROM sellerdata WHERE email = ? AND productname = ? AND quantity = ? AND price = ?";
+    var values = [
+        req.body.email, req.body.productName, req.body.quantity, req.body.price
+    ];
+    con.query(sql, values, (err, result) => {
+        if(err) throw err;
+        res.json({status : "record deleted"});
+    })
+})
+
 
 //  Sending email as receipt
 router.post('/user/receipt', (req, res, next) => {

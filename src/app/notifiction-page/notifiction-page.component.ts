@@ -43,12 +43,30 @@ export class NotifictionPageComponent implements OnInit {
     } 
   }
 
-  acceptButton() {
+  acceptButton(productdata : any) {
     const accept = {
       status : "2",
-      email : this.userId
+      email : this.userId,
+      quantity : productdata.quantity,
+      price : productdata.price
     }
     this.userService.orderAcceptance(accept).subscribe(data => {
+      console.log(data);
+    })
+    console.log(productdata);
+    const removeProduct = {
+      email : this.userId,
+      productName : productdata.productname,
+      quantity : productdata.quantity,
+      price : productdata.price
+    }
+    // //  Removing after accepting the product
+    // this.userService.removeSellerData(removeProduct).subscribe(data => {
+    //   console.log(data);
+    // })
+
+    //  updating sellerdata status 
+    this.userService.updateSellerStatus(accept).subscribe(data => {
       console.log(data);
     })
     this.reloadFunction();

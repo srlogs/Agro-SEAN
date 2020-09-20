@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router, Routes, RouterModule } from '@angular/router'; 
+
+
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
+
 export class AccountComponent implements OnInit {
   username : string;
   email : string;

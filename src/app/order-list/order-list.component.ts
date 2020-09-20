@@ -45,11 +45,13 @@ export class OrderListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //  Getting userdata
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
       const userEmail = {
         email : this.userId
       }
+      //  getting order items
       this.userService.getBuyProductData(userEmail).subscribe(data => {
         this.items = data;
         console.log(this.items);

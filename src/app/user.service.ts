@@ -88,6 +88,7 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/cartdata', data, { headers: headers});
   }
 
+  //  Storing seller product data
   postSellerData(data) : Observable<any> {
     const headerValues = {
       "Content-type" : "application/json",
@@ -97,13 +98,24 @@ export class UserService {
     return this.http.post('http://localhost:3000/api/user/seller', data, { headers: headers});
   }
  
+  //  Getting seller product data
   getSellerProduct(data) : Observable<any> {
     const headerValues = {
       "Content-type" : "application/json",
       "responseType" : "text"
     }
     var headers = new HttpHeaders(headerValues);
-    return this.http.post('http://localhost:3000/api/user/sellerproduct', data, {headers: headers});
+    return this.http.post('http://localhost:3000/api/user/sellerproduct', data, { headers: headers});
+  }
+
+  //  Updating status of the seller product data
+  updateSellerStatus(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/seller/status', data, { headers: headers});
   }
   
   getUserData(data) : Observable<any> {
@@ -178,6 +190,16 @@ export class UserService {
     }
     var headers = new HttpHeaders(headerValues);
     return this.http.post('http://localhost:3000/api/user/sellerlist', data, { headers: headers})
+  }
+
+  //  Deleting seller product after completion of the transaction
+  removeSellerData(data) : Observable<any> {
+    const headerValues = {
+      "Content-type" : "application/json",
+      "responseType" : "text"
+    }
+    var headers = new HttpHeaders(headerValues);
+    return this.http.post('http://localhost:3000/api/user/delete/product', data, { headers: headers});
   }
 
   //  sending email as product receipt

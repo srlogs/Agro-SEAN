@@ -37,7 +37,8 @@
               <h5 class="card-title">{{data.productname}}</h5>
               <p class="card-text">Quantity : {{data.quantity}}</p>
               <p class="card-text">Price : {{data.price}}</p>
-              <p class="card-text">Status : Not sold</p>
+              <p class="card-text" *ngIf = "data.status == 0">Status : Not sold</p>
+              <p class="card-text" *ngIf = "data.status == 1">Status : Sold</p>
               <p class="card-text"> Category : {{data.category}} </p>
             </div>
           </div>

@@ -77,22 +77,28 @@ export class BuyerPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //  component communication using subject and observables
     this.homeComponent.getBuyData().subscribe(data => {
       this.buyButtonData = data;
-      //console.log(this.buyButtonData);
     })
+
+    //  Getting user data
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {
       this.userId = data[0].email;
       console.log(this.userId);
+
       const productName = {
         productname : localStorage.getItem('productName'),
         email : this.userId
       }
+      //  Getting product data for picture and name
       this.userService.getSingleProduct(productName).subscribe(data => {
         this.productName = data[0].productname;
         this.location = data[0].name;
         this.product = data;
       })
+
+      //  Getting seller list of the product
       this.userService.getSellerProduct(productName).subscribe(data => {
         this.sellerProducts = data;
         this.seller = [];

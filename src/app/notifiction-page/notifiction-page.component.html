@@ -35,7 +35,7 @@
             <p class="card-text" *ngIf = "data.buyerstatus == 2">Status : Accepted</p>
             <p class="card-text" *ngIf = "data.buyerstatus == 3">Status : Rejected</p>
             <div class="row">
-              <button (click) = "acceptButton()" class="btn btn-success ml-1">Accept</button>
+              <button (click) = "acceptButton(data)" class="btn btn-success ml-1">Accept</button>
               <button (click) = "rejectButton()" class="btn btn-danger ml-3">Reject</button>
             </div>
         </div>

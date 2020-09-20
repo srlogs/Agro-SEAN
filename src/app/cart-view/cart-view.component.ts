@@ -13,6 +13,7 @@ export class CartViewComponent implements OnInit {
   userId : any;
   items : any;
   check : boolean = false;
+  buy : any;
   constructor(private homeComponent : HomeComponent, private router : Router, private userService : UserService) { }
 
   myAccountFunction() {
@@ -54,6 +55,12 @@ export class CartViewComponent implements OnInit {
       window.location.reload();
     })
   } 
+
+  buyButtonData(data : any) {
+    localStorage.setItem('productName', data.productname);
+    this.router.navigate(['/buyer-page']);
+  } 
+
   
   ngOnInit(): void {
     this.userService.getUserId(localStorage.getItem('accessToken')).subscribe(data => {

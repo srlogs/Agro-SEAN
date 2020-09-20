@@ -55,6 +55,7 @@ export class SellerPageComponent implements OnInit {
     this.userService.getLocation().then(pos => {
       this.latitude = pos.lat;
       this.longitude = pos.lon;
+      console.log(this.latitude);
       const productData = {
         email : this.items[0].email,
         productName : this.item[0].productname,
@@ -63,9 +64,12 @@ export class SellerPageComponent implements OnInit {
         quantity : this.quantity,
         price : this.price,
         latitude : this.latitude,
-        longitude : this.longitude
+        longitude : this.longitude,
+        status : "0"
       }
       console.log(productData);
+
+      //  storing seller data
       this.userService.postSellerData(productData).subscribe(data => {
         console.log(data);
       })
